@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All 3D Web - Modern Web Solutions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2d3436;
+            --secondary: #0984e3;
+            --dark: #362e2d;
+            --light: #dfe6e9;
+            --accent: #00cec9;
+            --gradient: linear-gradient(135deg, #6c5ce7, #00cec9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+            background: #ecf0f1;
+        }
+
+        /* Language Selector */
+        .language-select {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1001;
+        }
+
+        .language-select select {
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid var(--accent);
+            background: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(45, 52, 54, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        /* Hero Section with Floating Elements */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient);
+            color: rgb(255, 255, 255);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            animation: float 20s infinite linear;
+        }
+
+        .element-1 { top: 10%; left: 10%; }
+        .element-2 { top: 20%; right: 15%; animation-delay: -5s; }
+        .element-3 { bottom: 15%; left: 20%; animation-delay: -10s; }
+        .element-4 { bottom: 25%; right: 10%; animation-delay: -15s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(90deg); }
+            50% { transform: translate(0, 100px) rotate(180deg); }
+            75% { transform: translate(-50px, 50px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        /* About Section Enhancement */
+        .about {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #2d3436, #636e72);
+            color: white;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(45, 52, 54, 0.95);
+                padding: 1rem;
+                flex-direction: column;
+                align-items: center;
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+        }
+    
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background: var(--light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">All 3D Web</a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#services">Our Services</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <!-- Floating Elements -->
+        <img src="goo2 (Kopie).png" alt="3D Element" class="floating-element element-1">
+        <img src="goo2 (Kopie).png" alt="3D Element" class="floating-element element-2">
+        <img src="goo2 (Kopie).png" alt="3D Element" class="floating-element element-3">
+        <img src="goo2 (Kopie).png" alt="3D Element" class="floating-element element-4">
+        <img src="goo2 (Kopie).png" alt="3D Element" class="floating-element element-5">
+        
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Welcome to All 3D Web</h1>
+            <p>Creating stunning websites for businesses of all sizes</p>
+            
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-content" data-aos="fade-up">
+            <h2>About All 3D Web</h2>
+            <p>Welcome to All 3D Web, where innovation meets design excellence. As a cutting-edge web development company, we specialize in creating immersive digital experiences that transform businesses and captivate audiences.</p>
+            <p>With our team of skilled developers and designers, we bring your vision to life using the latest technologies and trends in web development. From responsive designs to seamless user experiences, we ensure your website stands out in today's digital landscape.</p>
+            
+            <div class="about-features">
+                <div class="feature-card">
+                    <h3>Innovation First</h3>
+                    <p>We stay ahead of the curve with cutting-edge technologies and modern design practices.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Client Success</h3>
+                    <p>Your success is our priority. We work closely with you to achieve your business goals.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Quality Assurance</h3>
+                    <p>Every project undergoes rigorous testing to ensure perfect functionality across all devices.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Quality Assurance</h3>
+                    <p>Every project undergoes rigorous testing to ensure perfect functionality across all devices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form with PHP Integration -->
+    <form action="process.php" method="POST" class="contact-form">
+        <!-- Your existing form fields -->
+    </form>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+  
+    </script>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">All 3D Web</a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#services">Our Services</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <section id="services" class="services">
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-up">
+                <h3>E-commerce Websites</h3>
+                <p>Custom online stores with secure payment integration</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Restaurant Websites</h3>
+                <p>Beautiful menus and online ordering systems</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Corporate Websites</h3>
+                <p>Professional web presence for your business</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Corporate Websites</h3>
+                <p>Professional web presence for your business</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Corporate Websites</h3>
+                <p>Professional web presence for your business</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <h3>Corporate Websites</h3>
+                <p>Professional web presence for your business</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="contact" class="contact">
+        <div class="contact-form" data-aos="fade-up">
+            <h2>Contact Us</h2>
+            <form>
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@all_3d_web"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div class="legal">
+                <p>© 2025 All 3D Web. Alle Rechte vorbehalten.</p>
+                <p>Datenschutzerklärung | Impressum</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
